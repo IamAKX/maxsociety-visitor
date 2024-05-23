@@ -1,6 +1,8 @@
 // ignore_for_file: depend_on_referenced_packages, avoid_web_libraries_in_flutter
 
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:ms_register/firebase_options.dart';
 import 'package:ms_register/l10n/l10n.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -14,7 +16,11 @@ import 'dart:html';
 import 'screens/confirm_flat_screen.dart';
 import 'service/api_provider.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const MyApp());
 }
 
