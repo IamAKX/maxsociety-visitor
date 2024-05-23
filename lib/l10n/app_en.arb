@@ -1,0 +1,18 @@
+{
+    "promptPhone":"Enter your phone number",
+    "promptName":"What is your name?",
+    "promptCamera":"Click your photo",
+    "promptType":"Is the building residential or commercial?",
+    "promptBlock":"Which block you want to visit?",
+    "promptFlat":"Which flat you want to visit?",
+    "promptPerson":"Whom do you want to meet?",
+    "promptPurpose":"What is the purpose of your visit?",
+    "welcome":"welcome",
+    "promptUserIdentity":"Is this you?",
+    "promptLastVisit":"Do you want to visit this flat?",
+    "takePicture":"Take Picture",
+    "tapMic":"Tap the microphone to start listening...",
+    "invalidPhoneNumber":"Invalid phone number",
+    "listen":"Listen",
+    "next":"Next"
+}
