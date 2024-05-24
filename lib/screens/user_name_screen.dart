@@ -76,7 +76,8 @@ class _UserNameScreenState extends State<UserNameScreen> {
           ),
           FloatingActionButton(
             onPressed: () {
-              if (_lastWords.length != 10) {
+              _stopListening();
+              if (_lastWords.isNotEmpty) {
                 widget.sessionData.visitor?.visitorName = _lastWords;
                 Navigator.of(context).pushNamed(TypeScreen.routePath,
                     arguments: widget.sessionData);

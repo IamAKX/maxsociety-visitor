@@ -72,12 +72,13 @@ class _BuildingScreenState extends State<BuildingScreen> {
           ),
           FloatingActionButton(
             onPressed: () {
+              _stopListening();
               if (_lastWords.isNotEmpty) {
                 widget.sessionData.log?.block = _lastWords;
                 Navigator.of(context).pushNamed(FlatScreen.routePath,
                     arguments: widget.sessionData);
               } else {
-                showToast(AppLocalizations.of(context)!.promptName);
+                showToast(AppLocalizations.of(context)!.promptBlock);
               }
             },
             tooltip: AppLocalizations.of(context)!.next,

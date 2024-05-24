@@ -72,12 +72,13 @@ class _FlatScreenState extends State<FlatScreen> {
           ),
           FloatingActionButton(
             onPressed: () {
+              _stopListening();
               if (_lastWords.isNotEmpty) {
                 widget.sessionData.log?.flatNo = _lastWords;
                 Navigator.of(context).pushNamed(PersonScreen.routePath,
                     arguments: widget.sessionData);
               } else {
-                showToast(AppLocalizations.of(context)!.promptName);
+                showToast(AppLocalizations.of(context)!.promptFlat);
               }
             },
             tooltip: AppLocalizations.of(context)!.next,

@@ -74,12 +74,13 @@ class _PersonScreenState extends State<PersonScreen> {
           ),
           FloatingActionButton(
             onPressed: () {
+              _stopListening();
               if (_lastWords.isNotEmpty) {
                 widget.sessionData.log?.residentName = _lastWords;
                 Navigator.of(context).pushNamed(PurposeScreen.routePath,
                     arguments: widget.sessionData);
               } else {
-                showToast(AppLocalizations.of(context)!.promptName);
+                showToast(AppLocalizations.of(context)!.promptPerson);
               }
             },
             tooltip: AppLocalizations.of(context)!.next,

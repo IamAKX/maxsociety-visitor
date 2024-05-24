@@ -93,12 +93,14 @@ class _PhoneScreenState extends State<PhoneScreen> {
                 sessionData.visitor?.mobileNo = phoneNumber;
                 Map<String, dynamic> response = await _api
                     .getRequest(Api.getVisitorsByMobileNo + phoneNumber);
-                log('resp');
-                if (response['success']) {
+
+                if (_api.status == ApiStatus.success) {
                   sessionData.visitor = VisitorModel.fromMap(response['data']);
+                  sessionData.isNewUser = false;
                   Navigator.of(context).pushNamed(ConfirmUserScreen.routePath,
                       arguments: sessionData);
                 } else {
+                  sessionData.isNewUser = true;
                   Navigator.of(context).pushNamed(TakePictureScreen.routePath,
                       arguments: sessionData);
                 }

@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:ms_register/model/error_model.dart';
 
 enum ApiStatus { ideal, loading, success, failed }
 
@@ -13,7 +14,7 @@ class ApiProvider extends ChangeNotifier {
     _dio = Dio();
   }
 
-  Future<dynamic> getRequest(String endpoint) async {
+  Future<Map<String, dynamic>> getRequest(String endpoint) async {
     status = ApiStatus.loading;
     notifyListeners();
     debugPrint('API : $endpoint');
@@ -35,18 +36,22 @@ class ApiProvider extends ChangeNotifier {
       status = ApiStatus.failed;
       var resBody = e.response?.data ?? {};
       notifyListeners();
-      return ('Error : ${resBody['message']}');
+
+      ErrorModel errorModel = ErrorModel(message: resBody['message']);
+      return errorModel.toMap();
     } catch (e) {
       status = ApiStatus.failed;
       notifyListeners();
-      return (e.toString());
+      ErrorModel errorModel = ErrorModel(message: 'Unable to process request');
+      return errorModel.toMap();
     }
     status = ApiStatus.failed;
     notifyListeners();
-    return 'Unable to process request';
+    ErrorModel errorModel = ErrorModel(message: 'Unable to process request');
+    return errorModel.toMap();
   }
 
-  Future<dynamic> postRequest(
+  Future<Map<String, dynamic>> postRequest(
       String endpoint, Map<String, dynamic> requestBody) async {
     status = ApiStatus.loading;
     notifyListeners();
@@ -72,19 +77,22 @@ class ApiProvider extends ChangeNotifier {
       var resBody = e.response?.data ?? {};
       notifyListeners();
       debugPrint(e.toString());
-      return ('Error : ${resBody['message']}');
+      ErrorModel errorModel = ErrorModel(message: '${resBody['message']}');
+      return errorModel.toMap();
     } catch (e) {
       status = ApiStatus.failed;
       notifyListeners();
       debugPrint(e.toString());
-      return (e.toString());
+      ErrorModel errorModel = ErrorModel(message: '${e.toString()}');
+      return errorModel.toMap();
     }
     status = ApiStatus.failed;
     notifyListeners();
-    return 'Unable to process request';
+    ErrorModel errorModel = ErrorModel(message: 'Unable to process request');
+    return errorModel.toMap();
   }
 
-  Future<dynamic> putRequest(
+  Future<Map<String, dynamic>> putRequest(
       String endpoint, Map<String, dynamic> requestBody) async {
     status = ApiStatus.loading;
     notifyListeners();
@@ -109,18 +117,21 @@ class ApiProvider extends ChangeNotifier {
       status = ApiStatus.failed;
       var resBody = e.response?.data ?? {};
       notifyListeners();
-      return ('Error : ${resBody['message']}');
+      ErrorModel errorModel = ErrorModel(message: resBody['message']);
+      return errorModel.toMap();
     } catch (e) {
       status = ApiStatus.failed;
       notifyListeners();
-      return (e.toString());
+      ErrorModel errorModel = ErrorModel(message: e.toString());
+      return errorModel.toMap();
     }
     status = ApiStatus.failed;
     notifyListeners();
-    return 'Unable to process request';
+    ErrorModel errorModel = ErrorModel(message: 'Unable to process request');
+    return errorModel.toMap();
   }
 
-  Future<dynamic> deleteRequest(String endpoint) async {
+  Future<Map<String, dynamic>> deleteRequest(String endpoint) async {
     status = ApiStatus.loading;
     notifyListeners();
     debugPrint('API : $endpoint');
@@ -143,14 +154,17 @@ class ApiProvider extends ChangeNotifier {
       status = ApiStatus.failed;
       var resBody = e.response?.data ?? {};
       notifyListeners();
-      return ('Error : ${resBody['message']}');
+      ErrorModel errorModel = ErrorModel(message: resBody['message']);
+      return errorModel.toMap();
     } catch (e) {
       status = ApiStatus.failed;
       notifyListeners();
-      return (e.toString());
+      ErrorModel errorModel = ErrorModel(message: e.toString());
+      return errorModel.toMap();
     }
     status = ApiStatus.failed;
     notifyListeners();
-    return 'Unable to process request';
+    ErrorModel errorModel = ErrorModel(message: 'Unable to process request');
+    return errorModel.toMap();
   }
 }

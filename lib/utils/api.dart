@@ -6,6 +6,7 @@ class Api {
   static const String getVisitorsById = '$baseUrl/maxsociety/visitors/';
   static const String getVisitorsByMobileNo =
       '$baseUrl/maxsociety/visitors/mobileNo/';
+  static const String createVisitor = '$baseUrl/maxsociety/visitors';
   static const String updateVisitors = '$baseUrl/maxsociety/visitors/';
   static const String deleteVisitors = '$baseUrl/maxsociety/visitors/';
 

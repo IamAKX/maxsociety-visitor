@@ -58,7 +58,6 @@ class _TypeScreenState extends State<TypeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
       body: getBody(context),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: Row(
@@ -73,12 +72,13 @@ class _TypeScreenState extends State<TypeScreen> {
           ),
           FloatingActionButton(
             onPressed: () {
+              _stopListening();
               if (_lastWords.isNotEmpty) {
                 widget.sessionData.log?.type = _lastWords;
-                Navigator.of(context)
-                    .pushNamed(BuildingScreen.routePath, arguments: widget.sessionData);
+                Navigator.of(context).pushNamed(BuildingScreen.routePath,
+                    arguments: widget.sessionData);
               } else {
-                showToast(AppLocalizations.of(context)!.promptName);
+                showToast(AppLocalizations.of(context)!.promptType);
               }
             },
             tooltip: AppLocalizations.of(context)!.next,

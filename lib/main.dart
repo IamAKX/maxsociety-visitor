@@ -7,7 +7,10 @@ import 'package:ms_register/l10n/l10n.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:ms_register/model/session_data.dart';
+import 'package:ms_register/model/visitor_log_model.dart';
+import 'package:ms_register/model/visitor_model.dart';
 import 'package:ms_register/screens/phone_screen.dart';
+import 'package:ms_register/screens/purpose_screen.dart';
 import 'package:ms_register/screens/take_picture_screen.dart';
 import 'package:ms_register/utils/router.dart';
 import 'package:provider/provider.dart';
@@ -39,6 +42,10 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    VisitorModel visitorModel = VisitorModel(
+        visitorName: 'A', imagePath: '///', mobileNo: '1212121212');
+    SessionData data = SessionData(
+        visitor: visitorModel, isNewUser: true, log: VisitorLogModel());
     language = getParams('lang');
     return MultiProvider(
       providers: [
@@ -54,7 +61,7 @@ class MyApp extends StatelessWidget {
           scaffoldBackgroundColor: Colors.white,
           useMaterial3: true,
         ),
-        home: const PhoneScreen(),
+        home: const PhoneScreen(), //PurposeScreen(sessionData: data),
         navigatorKey: navigatorKey,
         onGenerateRoute: NavRoute.generatedRoute,
         supportedLocales: L10n.all,
