@@ -12,6 +12,7 @@ import 'package:ms_register/model/visitor_model.dart';
 import 'package:ms_register/screens/phone_screen.dart';
 import 'package:ms_register/screens/purpose_screen.dart';
 import 'package:ms_register/screens/take_picture_screen.dart';
+import 'package:ms_register/utils/helper_methods.dart';
 import 'package:ms_register/utils/router.dart';
 import 'package:provider/provider.dart';
 import 'dart:html';

@@ -61,7 +61,10 @@ class NavRoute {
                   sessionData: settings.arguments as SessionData,
                 ));
       case ConfirmFlatScreen.routePath:
-        return MaterialPageRoute(builder: (_) => const ConfirmFlatScreen());
+        return MaterialPageRoute(
+            builder: (_) => ConfirmFlatScreen(
+                  sessionData: settings.arguments as SessionData,
+                ));
 
       default:
         return errorRoute();

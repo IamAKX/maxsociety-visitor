@@ -99,9 +99,14 @@ class _PurposeScreenState extends State<PurposeScreen> {
 
                 widget.sessionData.log?.visitorId =
                     widget.sessionData.visitor?.id;
-                Map<String, dynamic> resp = await _api.postRequest(
-                    Api.createVisitorLogs,
-                    widget.sessionData.log?.toMap() ?? {});
+                Map<String, dynamic> req =
+                    widget.sessionData.log?.toMap() ?? {};
+                req.remove('createdOn');
+                req.remove('updatedOn');
+                req.remove('id');
+                req.remove('visitStatus');
+                Map<String, dynamic> resp =
+                    await _api.postRequest(Api.createVisitorLogs, req);
                 if (_api.status == ApiStatus.success) {
                   Navigator.of(context).pushNamed(WelcomeScreen.routePath,
                       arguments: widget.sessionData);

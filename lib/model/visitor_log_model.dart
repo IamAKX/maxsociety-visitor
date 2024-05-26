@@ -9,6 +9,8 @@ class VisitorLogModel {
   String? type;
   String? residentName;
   String? visitPurpose;
+  String? createdOn;
+  String? updatedOn;
   VisitorLogModel({
     this.id,
     this.visitorId,
@@ -18,6 +20,8 @@ class VisitorLogModel {
     this.type,
     this.residentName,
     this.visitPurpose,
+    this.createdOn,
+    this.updatedOn,
   });
 
   VisitorLogModel copyWith({
@@ -29,6 +33,8 @@ class VisitorLogModel {
     String? type,
     String? residentName,
     String? visitPurpose,
+    String? createdOn,
+    String? updatedOn,
   }) {
     return VisitorLogModel(
       id: id ?? this.id,
@@ -39,6 +45,8 @@ class VisitorLogModel {
       type: type ?? this.type,
       residentName: residentName ?? this.residentName,
       visitPurpose: visitPurpose ?? this.visitPurpose,
+      createdOn: createdOn ?? this.createdOn,
+      updatedOn: updatedOn ?? this.updatedOn,
     );
   }
 
@@ -69,6 +77,12 @@ class VisitorLogModel {
     if (visitPurpose != null) {
       result.addAll({'visitPurpose': visitPurpose});
     }
+    if (createdOn != null) {
+      result.addAll({'createdOn': createdOn});
+    }
+    if (updatedOn != null) {
+      result.addAll({'updatedOn': updatedOn});
+    }
 
     return result;
   }
@@ -83,6 +97,8 @@ class VisitorLogModel {
       type: map['type'],
       residentName: map['residentName'],
       visitPurpose: map['visitPurpose'],
+      createdOn: map['createdOn'],
+      updatedOn: map['updatedOn'],
     );
   }
 
@@ -93,7 +109,7 @@ class VisitorLogModel {
 
   @override
   String toString() {
-    return 'VisitorLogModel(id: $id, visitorId: $visitorId, visitStatus: $visitStatus, block: $block, flatNo: $flatNo, type: $type, residentName: $residentName, visitPurpose: $visitPurpose)';
+    return 'VisitorLogModel(id: $id, visitorId: $visitorId, visitStatus: $visitStatus, block: $block, flatNo: $flatNo, type: $type, residentName: $residentName, visitPurpose: $visitPurpose, createdOn: $createdOn, updatedOn: $updatedOn)';
   }
 
   @override
@@ -108,7 +124,9 @@ class VisitorLogModel {
         other.flatNo == flatNo &&
         other.type == type &&
         other.residentName == residentName &&
-        other.visitPurpose == visitPurpose;
+        other.visitPurpose == visitPurpose &&
+        other.createdOn == createdOn &&
+        other.updatedOn == updatedOn;
   }
 
   @override
@@ -120,6 +138,8 @@ class VisitorLogModel {
         flatNo.hashCode ^
         type.hashCode ^
         residentName.hashCode ^
-        visitPurpose.hashCode;
+        visitPurpose.hashCode ^
+        createdOn.hashCode ^
+        updatedOn.hashCode;
   }
 }

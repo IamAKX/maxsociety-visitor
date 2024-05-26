@@ -8,3 +8,5 @@ showToast(String message) {
       timeInSecForIosWeb: 1,
       fontSize: 16.0);
 }
+
+Map<String, String> ttsLanguageMap = {'en': 'en-IN', 'hi': 'hi-IN'};

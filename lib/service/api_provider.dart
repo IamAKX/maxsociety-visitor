@@ -55,8 +55,10 @@ class ApiProvider extends ChangeNotifier {
       String endpoint, Map<String, dynamic> requestBody) async {
     status = ApiStatus.loading;
     notifyListeners();
+    requestBody.remove('id');
     debugPrint('API : $endpoint');
     debugPrint('Request : ${json.encode(requestBody)}');
+
     try {
       Response response = await _dio.post(
         endpoint,
@@ -67,7 +69,7 @@ class ApiProvider extends ChangeNotifier {
         ),
       );
       debugPrint('Response : ${response.data}');
-      if (response.statusCode == 200) {
+      if (response.statusCode == 201) {
         status = ApiStatus.success;
         notifyListeners();
         return response.data;

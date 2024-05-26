@@ -77,7 +77,8 @@ class _TakePictureScreenState extends State<TakePictureScreen> {
           verticalGap(Constants.defaultPadding),
           Expanded(
             child: buildCamera(context),
-          )
+          ),
+          verticalGap(Constants.defaultPadding),
         ],
       ),
     );
@@ -140,8 +141,8 @@ class _CameraViewState extends State<CameraView> {
   }
 
   @override
-  void dispose() {
-    controller?.dispose();
+  void dispose() async {
+    await controller!.dispose();
     super.dispose();
   }
 
@@ -193,6 +194,7 @@ class _CameraViewState extends State<CameraView> {
                     });
 
                     await controller!.pausePreview();
+
                     Navigator.of(context).pushNamed(UserNameScreen.routePath,
                         arguments: widget.sessionData);
                   },
@@ -201,14 +203,17 @@ class _CameraViewState extends State<CameraView> {
           ),
         ],
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            AspectRatio(aspectRatio: 16 / 9, child: CameraPreview(controller!)),
-            verticalGap(Constants.defaultPadding),
-          ],
-        ),
-      ),
+      // body: SingleChildScrollView(
+      //   child: Column(
+      //     children: [
+      //       AspectRatio(aspectRatio: 9 / 16, child: CameraPreview(controller!)),
+      //       verticalGap(Constants.defaultPadding),
+      //     ],
+      //   ),
+      // ),
+      body: Center(
+          child: AspectRatio(
+              aspectRatio: 9 / 16, child: CameraPreview(controller!))),
     );
   }
 }

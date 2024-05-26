@@ -3,6 +3,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:ms_register/main.dart';
 import 'package:ms_register/model/session_data.dart';
 import 'package:ms_register/model/visitor_log_model.dart';
 import 'package:ms_register/model/visitor_model.dart';
@@ -36,16 +37,26 @@ class _PhoneScreenState extends State<PhoneScreen> {
   bool _speechEnabled = false;
   String _lastWords = '';
   late ApiProvider _api;
+  bool isInitialized = false;
 
   @override
   void initState() {
     super.initState();
     sessionData = SessionData(visitor: VisitorModel(), log: VisitorLogModel());
-    WidgetsBinding.instance.addPostFrameCallback((_) => _initSpeech());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _initSpeech();
+    });
+  }
+
+ 
+  Future<void> _speak(String text) async {
+   
   }
 
   void _initSpeech() async {
     _speechEnabled = await _speechToText.initialize();
+
     setState(() {});
   }
 
@@ -68,6 +79,7 @@ class _PhoneScreenState extends State<PhoneScreen> {
   @override
   Widget build(BuildContext context) {
     _api = Provider.of<ApiProvider>(context);
+
     return Scaffold(
       body: _api.status == ApiStatus.loading
           ? const Center(
@@ -96,6 +108,8 @@ class _PhoneScreenState extends State<PhoneScreen> {
 
                 if (_api.status == ApiStatus.success) {
                   sessionData.visitor = VisitorModel.fromMap(response['data']);
+                  sessionData.log = VisitorLogModel.fromMap(
+                      response['data']['lastVisitorLog']);
                   sessionData.isNewUser = false;
                   Navigator.of(context).pushNamed(ConfirmUserScreen.routePath,
                       arguments: sessionData);
@@ -106,6 +120,7 @@ class _PhoneScreenState extends State<PhoneScreen> {
                 }
               } else {
                 showToast(AppLocalizations.of(context)!.invalidPhoneNumber);
+                _speak(AppLocalizations.of(context)!.promptPhone);
               }
             },
             tooltip: AppLocalizations.of(context)!.next,
