@@ -13,6 +13,7 @@ import 'package:speech_to_text/speech_recognition_result.dart';
 import 'package:speech_to_text/speech_to_text.dart';
 import 'package:siri_wave/siri_wave.dart';
 
+import '../main.dart';
 import '../model/session_data.dart';
 import '../service/api_provider.dart';
 import '../utils/api.dart';
@@ -134,12 +135,23 @@ class _PurposeScreenState extends State<PurposeScreen> {
         children: [
           const Header(),
           verticalGap(Constants.defaultPadding * 2),
-          Text(
-            AppLocalizations.of(context)!.promptPurpose,
-            style: const TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 20,
-            ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                AppLocalizations.of(context)!.promptPurpose,
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20,
+                ),
+              ),
+              IconButton(
+                onPressed: () {
+                  speak(AppLocalizations.of(context)!.promptPurpose);
+                },
+                icon: Icon(Icons.volume_up_sharp),
+              )
+            ],
           ),
           Expanded(
             child: Center(

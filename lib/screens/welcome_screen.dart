@@ -6,6 +6,7 @@ import 'package:ms_register/utils/constants.dart';
 import 'package:ms_register/widget/gaps.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../main.dart';
 import '../widget/header.dart';
 
 class WelcomeScreen extends StatefulWidget {
@@ -32,12 +33,23 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
         children: [
           const Header(),
           verticalGap(Constants.defaultPadding * 2),
-          Text(
-            AppLocalizations.of(context)!.welcome,
-            style: const TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 20,
-            ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                AppLocalizations.of(context)!.welcome,
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20,
+                ),
+              ),
+              IconButton(
+                onPressed: () {
+                  speak(AppLocalizations.of(context)!.welcome);
+                },
+                icon: Icon(Icons.volume_up_sharp),
+              )
+            ],
           )
         ],
       ),

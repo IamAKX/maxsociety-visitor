@@ -14,6 +14,8 @@ import 'package:ms_register/widget/gaps.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:ms_register/widget/header.dart';
 
+import '../main.dart';
+
 class TakePictureScreen extends StatefulWidget {
   const TakePictureScreen({super.key, required this.sessionData});
   static const String routePath = '/takePictureScreen';
@@ -67,12 +69,23 @@ class _TakePictureScreenState extends State<TakePictureScreen> {
         children: [
           const Header(),
           verticalGap(Constants.defaultPadding * 2),
-          Text(
-            AppLocalizations.of(context)!.promptCamera,
-            style: const TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 20,
-            ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                AppLocalizations.of(context)!.promptCamera,
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20,
+                ),
+              ),
+              IconButton(
+                onPressed: () {
+                  speak(AppLocalizations.of(context)!.promptCamera);
+                },
+                icon: Icon(Icons.volume_up_sharp),
+              )
+            ],
           ),
           verticalGap(Constants.defaultPadding),
           Expanded(

@@ -16,6 +16,7 @@ import 'package:speech_to_text/speech_recognition_result.dart';
 import 'package:speech_to_text/speech_to_text.dart';
 import 'package:string_validator/string_validator.dart';
 
+import '../main.dart';
 import '../widget/header.dart';
 
 class UserNameScreen extends StatefulWidget {
@@ -102,12 +103,23 @@ class _UserNameScreenState extends State<UserNameScreen> {
         children: [
           const Header(),
           verticalGap(Constants.defaultPadding * 2),
-          Text(
-            AppLocalizations.of(context)!.promptName,
-            style: const TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 20,
-            ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                AppLocalizations.of(context)!.promptName,
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20,
+                ),
+              ),
+              IconButton(
+                onPressed: () {
+                  speak(AppLocalizations.of(context)!.promptName);
+                },
+                icon: Icon(Icons.volume_up_sharp),
+              )
+            ],
           ),
           Expanded(
             child: Center(

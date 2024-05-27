@@ -49,11 +49,6 @@ class _PhoneScreenState extends State<PhoneScreen> {
     });
   }
 
- 
-  Future<void> _speak(String text) async {
-   
-  }
-
   void _initSpeech() async {
     _speechEnabled = await _speechToText.initialize();
 
@@ -120,7 +115,6 @@ class _PhoneScreenState extends State<PhoneScreen> {
                 }
               } else {
                 showToast(AppLocalizations.of(context)!.invalidPhoneNumber);
-                _speak(AppLocalizations.of(context)!.promptPhone);
               }
             },
             tooltip: AppLocalizations.of(context)!.next,
@@ -140,12 +134,22 @@ class _PhoneScreenState extends State<PhoneScreen> {
         children: [
           const Header(),
           verticalGap(Constants.defaultPadding * 2),
-          Text(
-            AppLocalizations.of(context)!.promptPhone,
-            style: const TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 20,
-            ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                AppLocalizations.of(context)!.promptPhone,
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20,
+                ),
+              ),
+              IconButton(
+                  onPressed: () {
+                    speak(AppLocalizations.of(context)!.promptPhone);
+                  },
+                  icon: Icon(Icons.volume_up_sharp))
+            ],
           ),
           Expanded(
             child: Center(

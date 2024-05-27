@@ -2,6 +2,7 @@
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 import 'package:ms_register/firebase_options.dart';
 import 'package:ms_register/l10n/l10n.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -30,6 +31,7 @@ Future<void> main() async {
 
 String language = 'en';
 final navigatorKey = GlobalKey<NavigatorState>();
+late FlutterTts flutterTts;
 
 String getParams(String param) {
   var uri = Uri.dataFromString(window.location.href);
@@ -43,11 +45,10 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    VisitorModel visitorModel = VisitorModel(
-        visitorName: 'A', imagePath: '///', mobileNo: '1212121212');
-    SessionData data = SessionData(
-        visitor: visitorModel, isNewUser: true, log: VisitorLogModel());
+    flutterTts = FlutterTts();
+
     language = getParams('lang');
+
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
@@ -76,4 +77,9 @@ class MyApp extends StatelessWidget {
       ),
     );
   }
+}
+
+Future<void> speak(String text) async {
+  flutterTts.setLanguage(ttsLanguageMap[language]!);
+  flutterTts.speak(text);
 }

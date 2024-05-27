@@ -10,6 +10,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:speech_to_text/speech_recognition_result.dart';
 import 'package:speech_to_text/speech_to_text.dart';
 
+import '../main.dart';
 import '../model/session_data.dart';
 import '../widget/header.dart';
 
@@ -92,12 +93,23 @@ class _ConfirmFlatScreenState extends State<ConfirmFlatScreen> {
         children: [
           const Header(),
           verticalGap(Constants.defaultPadding * 2),
-          Text(
-            AppLocalizations.of(context)!.promptLastVisit,
-            style: const TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 20,
-            ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                AppLocalizations.of(context)!.promptLastVisit,
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20,
+                ),
+              ),
+              IconButton(
+                onPressed: () {
+                  speak(AppLocalizations.of(context)!.promptLastVisit);
+                },
+                icon: Icon(Icons.volume_up_sharp),
+              )
+            ],
           ),
           verticalGap(Constants.defaultPadding * 2),
           getVisitDetailRow(

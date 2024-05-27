@@ -11,6 +11,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:speech_to_text/speech_recognition_result.dart';
 import 'package:speech_to_text/speech_to_text.dart';
 
+import '../main.dart';
 import '../utils/helper_methods.dart';
 import '../widget/header.dart';
 import 'take_picture_screen.dart';
@@ -97,12 +98,23 @@ class _ConfirmUserScreenState extends State<ConfirmUserScreen> {
         children: [
           const Header(),
           verticalGap(Constants.defaultPadding * 2),
-          Text(
-            AppLocalizations.of(context)!.promptUserIdentity,
-            style: const TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 20,
-            ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                AppLocalizations.of(context)!.promptUserIdentity,
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20,
+                ),
+              ),
+              IconButton(
+                onPressed: () {
+                  speak(AppLocalizations.of(context)!.promptUserIdentity);
+                },
+                icon: Icon(Icons.volume_up_sharp),
+              )
+            ],
           ),
           verticalGap(Constants.defaultPadding * 2),
           CachedNetworkImage(
