@@ -16,3 +16,26 @@ showToast(String message) {
 }
 
 Map<String, String> ttsLanguageMap = {'en': 'en-IN', 'hi': 'hi-IN'};
+
+showPopup(Widget widget, BuildContext context) {
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        content: Container(
+          width: 300,
+          height: 600,
+          child: widget,
+        ),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            child: const Text('OK'),
+          ),
+        ],
+      );
+    },
+  );
+}

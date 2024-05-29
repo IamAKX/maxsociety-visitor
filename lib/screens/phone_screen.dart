@@ -102,6 +102,13 @@ class _PhoneScreenState extends State<PhoneScreen> {
                     .getRequest(Api.getVisitorsByMobileNo + phoneNumber);
 
                 if (_api.status == ApiStatus.success) {
+                  if (response['data'] == null ||
+                      response['data']['lastVisitorLog']) {
+                    sessionData.isNewUser = true;
+                    Navigator.of(context).pushNamed(TakePictureScreen.routePath,
+                        arguments: sessionData);
+                    return;
+                  }
                   sessionData.visitor = VisitorModel.fromMap(response['data']);
                   sessionData.log = VisitorLogModel.fromMap(
                       response['data']['lastVisitorLog']);

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ms_register/model/session_data.dart';
+import 'package:ms_register/screens/admin/admin_portal.dart';
 import 'package:ms_register/screens/building_screen.dart';
 import 'package:ms_register/screens/flat_screen.dart';
 import 'package:ms_register/screens/person_screen.dart';
@@ -65,6 +66,8 @@ class NavRoute {
             builder: (_) => ConfirmFlatScreen(
                   sessionData: settings.arguments as SessionData,
                 ));
+      case AdminPortal.routePath:
+        return MaterialPageRoute(builder: (_) => const AdminPortal());
 
       default:
         return errorRoute();

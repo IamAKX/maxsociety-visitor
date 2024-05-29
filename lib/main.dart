@@ -7,18 +7,12 @@ import 'package:ms_register/firebase_options.dart';
 import 'package:ms_register/l10n/l10n.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:ms_register/model/session_data.dart';
-import 'package:ms_register/model/visitor_log_model.dart';
-import 'package:ms_register/model/visitor_model.dart';
 import 'package:ms_register/screens/phone_screen.dart';
-import 'package:ms_register/screens/purpose_screen.dart';
-import 'package:ms_register/screens/take_picture_screen.dart';
 import 'package:ms_register/utils/helper_methods.dart';
 import 'package:ms_register/utils/router.dart';
 import 'package:provider/provider.dart';
 import 'dart:html';
 
-import 'screens/confirm_flat_screen.dart';
 import 'service/api_provider.dart';
 
 Future<void> main() async {

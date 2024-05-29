@@ -19,5 +19,5 @@ class Api {
       '$baseUrl/maxsociety/visitorLogs/mobileNo/';
   static const String createVisitorLogs = '$baseUrl/maxsociety/visitorLogs';
   static const String updateVisitorLogs = '$baseUrl/maxsociety/visitorLogs/';
-  static const String deleteFlat = '$baseUrl/maxsociety/visitorLogs/';
+  static const String deleteVisitorLog = '$baseUrl/maxsociety/visitorLogs/';
 }
